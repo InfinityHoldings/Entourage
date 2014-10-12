@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.*;
 
-import models.EntourageUser;
+
 
 import org.hibernate.*;
 import org.mindrot.jbcrypt.*;
