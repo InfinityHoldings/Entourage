@@ -186,23 +186,23 @@ public class UserController extends Controller {
 		return null;
 	}
 
-	@BodyParser.Of(BodyParser.Json.class)
+	//@BodyParser.Of(BodyParser.Json.class)
 	public static Result loginbones(){
 		String uname = request().getQueryString("username"); 
 	//	String postname = request().body().asText(); 
-		RequestBody body = request().body(); 
-		String 	requestString = body.toString(); 
+		//RequestBody body = request().body();
+	//	String 	requestString = body.toString();
 //		JsonNode node = request().body().asJson(); 
 //		String nodename = node.findPath("username").textValue(); 
 //		
-		System.out.print("Request String = " + requestString + "\n" + "JSON = " + body.asText() + "\n"); //+ requestString + "\n"); // + postname.findValue("username")); 
+		//System.out.print("Request String = " + requestString + "\n" + "JSON = " + body.asText() + "\n"); //+ requestString + "\n"); // + postname.findValue("username"));
 		
 		return ok("Hello, "+ uname); 
 	}
 	
 	public static boolean authenticate(String userName, String password,
 			String passwordHash) {
-		if (username != null && BCrypt.checkpw(password, passwordHash)) {
+		if (userName != null && BCrypt.checkpw(password, passwordHash)) {
 			return true;
 		} else {
 			return false;

@@ -14,7 +14,7 @@ GET     /assets/*file                             controllers.Assets.at(path="/p
 GET     /users                                    controllers.UserController.getAllUsers()
 
 #User Login
-Post     /login   	   controllers.UserController.login()
+POST	/login   	   			     controllers.UserController.login()
 
 POST 	/rest/loginbones 				   controllers.UserController.loginbones() 
 
