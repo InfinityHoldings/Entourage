@@ -34,6 +34,15 @@ public class EntourageUser{
 		//this.setProfilePictureMedium(picMedium);
 		//this.setProfilePictureSmall(picSmall);
 	}
+	
+	//for signup 
+	public EntourageUser(String userName, String email, String city, String state, String password){
+		this.userName = userName; 
+		this.email = email; 
+		this.city = city; 
+		this.state = state; 
+		this.password = password; 
+	}
 
 	/**
 	 * @return the UID
