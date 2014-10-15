@@ -11,13 +11,18 @@ GET     /assets/*file                             controllers.Assets.at(path="/p
 #-------------------------------------- User API -----------------------------------------#
 
 #Get All Users
-GET     /users                                    controllers.UserController.getAllUsers()
+GET     /users                                  controllers.UserController.getAllUsers()
 
 #User Login
-POST	/login   	   			     controllers.UserController.login()
+POST	/login   	   			     			controllers.UserController.login()
+
+POST 	/rest/loginbones 				   		controllers.UserController.loginbones() 
+
 
 #Create New User
 POST    /createUserAccount/:lname/:fname/:birthDate/:title/:address1/:address2/:city/:state/:postal/:phone/:email/:password/:creationDate/:userName                                           controllers.UserController.createUserAccount(lname: String, fname: String, birthDate: String, title: String, address1: String, address2: String, city: String, state: String, postal: String, phone: String, email: String, password: String, creationDate: String, userName: String)
+
+POST	/rest/signup							controllers.UserController.signUp()	
 
 #Get User Detail
 GET     /users/:userName                          controllers.UserController.UserDetail(userName: String)
