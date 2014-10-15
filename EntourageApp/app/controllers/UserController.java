@@ -20,7 +20,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 public class UserController extends Controller {
-
+	static Session session = null;
+    // private static boolean _validate = false;
+	//private static String _uname, _password;
 	private static boolean _validate = false;
 	private static String _uname, _passwordHash;
 
@@ -169,6 +171,8 @@ public class UserController extends Controller {
 	}
 
 	public static Result login() {
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
 		JsonNode json = request().body().asJson();
 		ObjectNode result = Json.newObject();
 		if (json == null) {
