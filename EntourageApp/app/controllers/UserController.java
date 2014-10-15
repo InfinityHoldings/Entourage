@@ -2,23 +2,20 @@ package controllers;
 
 import java.util.*;
 
-
+import models.EntourageUser;
 
 import org.hibernate.*;
 import org.mindrot.jbcrypt.*;
-import java.lang.NullPointerException;
-
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import play.libs.Json;
-import play.mvc.Controller;
-import play.mvc.Result;
+import play.mvc.*;
 
 public class UserController extends Controller {
-
-	private static boolean _validate = false;
-	private static String _uname, _passwordHash;
+	static Session session = null;
+	// private static boolean _validate = false;
+	private static String _uname, _password;
 
 	public static Result createUserAccount(String lname, String fname,
 			String birthDate, String title, String address1, String address2,
@@ -56,6 +53,7 @@ public class UserController extends Controller {
 			String sql = "Select * from ent_user";
 			SQLQuery q = session.createSQLQuery(sql);
 			q.addEntity(EntourageUser.class);
+			@SuppressWarnings("unchecked")
 			Iterator<EntourageUser> iterator = q.list().iterator();
 			while (iterator.hasNext()) {
 				EntourageUser entUser = iterator.next();
@@ -130,79 +128,54 @@ public class UserController extends Controller {
 	}
 
 	public static Result login() {
+		session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
 		JsonNode json = request().body().asJson();
 		ObjectNode result = Json.newObject();
 		if (json == null) {
 			return badRequest("Expecting Json data");
 		} else {
-			String username = json.findPath("username").textValue();
-			String password = json.findPath("password").textValue();
-			if (username == null || password == null) {
-				result.put("status", "KO");
-				result.put("message", "Missing parameter [name]");
-				return badRequest(result);
-			} else {
-				result.put("status", "OK");
-				result.put("username", "Hello " + username);
-				result.put("password", password);
-				return ok(result);
-			}
-		}
-	}
-
-	public static Result login2(String username, String password) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			String sql = "Select * from ent_user where username = '" + username
-					+ "';";
-			SQLQuery q = session.createSQLQuery(sql);
-			q.addEntity(EntourageUser.class);
-			Iterator<EntourageUser> iterator = q.list().iterator();
 			try {
-				while (iterator.hasNext()) {
-					EntourageUser entUser = iterator.next();
-					_uname = entUser.getUserName();
-					// _passwordHash = entUser.getPassword();
-					// _validate = authenticate(username, password,
-					// _passwordHash);
+				tx = session.beginTransaction();
+				String username = json.findPath("username").textValue();
+				String password = json.findPath("password").textValue();
+				String sql = "Select * from ent_user where username = '"
+						+ username + "' and password = '" + password + "';";
+				SQLQuery q = session.createSQLQuery(sql);
+				q.addEntity(EntourageUser.class);
 
-					if (username.equalsIgnoreCase(_uname)) {
-						return ok("ok");
-					} else {
-						return ok("No");
-					}
-				}
-			} catch (NullPointerException ex) {
-				ex.printStackTrace();
+				@SuppressWarnings("unchecked")
+				Iterator<EntourageUser> iterator = q.list().iterator();
+				if (!iterator.hasNext()) {
+					result.put("status", "0");
+					return ok("{User:" + result + "}");
+				} else
+					do {
+						EntourageUser entUser = iterator.next();
+						_uname = entUser.getUserName();
+						_password = entUser.getPassword();
+						// _passwordHash = entUser.getPassword();
+						// _validate = authenticate(username, password,
+						// _passwordHash);
+						if (username.equalsIgnoreCase(_uname)
+								&& password.equals(_password)) {
+							result.put("status", "1");
+							return ok("{User:" + result + "}");
+						}
+					} while (iterator.hasNext());
+				tx.commit();
+
+			} catch (HibernateException e) {
+				if (tx != null)
+					tx.rollback();
+				e.printStackTrace();
+			} finally {
+				session.close();
 			}
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-
-			session.close();
 		}
 		return null;
 	}
 
-	//@BodyParser.Of(BodyParser.Json.class)
-	public static Result loginbones(){
-		String uname = request().getQueryString("username"); 
-	//	String postname = request().body().asText(); 
-		//RequestBody body = request().body();
-	//	String 	requestString = body.toString();
-//		JsonNode node = request().body().asJson(); 
-//		String nodename = node.findPath("username").textValue(); 
-//		
-		//System.out.print("Request String = " + requestString + "\n" + "JSON = " + body.asText() + "\n"); //+ requestString + "\n"); // + postname.findValue("username"));
-		
-		return ok("Hello, "+ uname); 
-	}
-	
 	public static boolean authenticate(String userName, String password,
 			String passwordHash) {
 		if (userName != null && BCrypt.checkpw(password, passwordHash)) {
