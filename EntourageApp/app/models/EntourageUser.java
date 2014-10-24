@@ -5,7 +5,7 @@ import java.sql.*;
 public class EntourageUser{
 	private int uid;
 	private String lastName, firstName, birthDate, title, address1, address2,
-			city, state, postal, phone, email, password, userName;
+			city, state, postal, phone, email, password, username;
 	private String creationDate;
 	private Blob profilePictureMedium, profilePictureSmall;
 
@@ -37,7 +37,7 @@ public class EntourageUser{
 	
 	//for signup 
 	public EntourageUser(String userName, String email, String city, String state, String password){
-		this.userName = userName; 
+		this.username = userName; 
 		this.email = email; 
 		this.city = city; 
 		this.state = state; 
@@ -243,7 +243,7 @@ public class EntourageUser{
 	 * @return the displayName
 	 */
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
 	/**
@@ -251,7 +251,7 @@ public class EntourageUser{
 	 *            the userName to set
 	 */
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.username = userName;
 	}
 
 	/**
@@ -313,7 +313,7 @@ public class EntourageUser{
 		phone = "";
 		email = "";
 		password = "";
-		userName = "";
+		username = "";
 		creationDate = null;
 		profilePictureMedium = null;
 		profilePictureSmall = null;

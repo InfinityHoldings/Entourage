@@ -1,12 +1,12 @@
 package controllers;
 
+import java.awt.Cursor;
 import java.util.*;
 
 import models.EntourageUser;
 
 import org.hibernate.*;
 import org.mindrot.jbcrypt.*;
-import java.lang.NullPointerException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -20,15 +20,14 @@ public class UserController extends Controller {
 	static Session session = null;
 	// private static boolean _validate = false;
 	// private static String _uname, _password;
-	private static boolean _validate = false;
+	// private static boolean _validate = false;
 	private static String _uname, _password;
 
 	public static Result signUp() {
-
-		JsonNode json = request().body().asJson();
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		JsonNode json = request().body().asJson();
 		Transaction tx = null;
+		ObjectNode result = Json.newObject();
 
 		try {
 			tx = session.beginTransaction();
@@ -38,12 +37,18 @@ public class UserController extends Controller {
 			String state = json.findPath("state").textValue();
 			String password = json.findPath("password").textValue();
 
+			if (isExist(userName)) {
+				result.put("status", "0");
+				return ok("{UserExist:" + result + "}");
+			}
 			EntourageUser user = new EntourageUser(userName, email, city,
 					state, password);
 
 			Logger.debug("SignUp EntourageUser", user.toString());
 			session.save(user);
 			tx.commit();
+			result.put("status", "1");
+			return ok("{UserExist:" + result + "}");
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
@@ -180,6 +185,31 @@ public class UserController extends Controller {
 			session.close();
 		}
 		return null;
+	}
+
+	public static boolean isExist(String userName) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		boolean exist = false;
+		try {
+			tx = session.beginTransaction();
+			String sql = "Select 1 FROM ent_user WHERE username = '" + userName
+					+ "'";
+			SQLQuery q = session.createSQLQuery(sql);
+			@SuppressWarnings("unchecked")
+			Iterator<EntourageUser> iterator = q.list().iterator();
+			if (!iterator.hasNext())
+				exist = false;
+			else
+				exist = true;
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return exist;
 	}
 
 	public static boolean authenticate(String userName, String password,
