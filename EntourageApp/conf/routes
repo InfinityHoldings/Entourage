@@ -10,17 +10,14 @@ GET     /assets/*file                             controllers.Assets.at(path="/p
 
 #-------------------------------------- User API -----------------------------------------#
 
-#Get All Users
-GET     /users                                    controllers.UserController.getAllUsers()
-
 #User Login
-POST	/login   	   			     controllers.UserController.login()
-
-POST 	/rest/loginbones 				   controllers.UserController.loginbones() 
-
+POST	/rest/login   	   			  		      controllers.UserController.login()
 
 #Create New User
-POST    /createUserAccount/:lname/:fname/:birthDate/:title/:address1/:address2/:city/:state/:postal/:phone/:email/:password/:creationDate/:userName                                           controllers.UserController.createUserAccount(lname: String, fname: String, birthDate: String, title: String, address1: String, address2: String, city: String, state: String, postal: String, phone: String, email: String, password: String, creationDate: String, userName: String)
+POST    /rest/signUp                              controllers.UserController.signUp()
+
+#Get All Users
+GET     /users                                    controllers.UserController.getAllUsers()
 
 #Get User Detail
 GET     /users/:userName                          controllers.UserController.UserDetail(userName: String)
@@ -33,3 +30,8 @@ POST   /users/:userName/updateNormalInfo          controllers.UserController.upd
 
 #Delete User
 POST   /users/:userName/delete                    controllers.UserController.deleteUser(userName: String)
+
+#--------------------------------------- S3 Connectivity ----------------------------------#
+
+GET     /                         			      controllers.Application.index()
+POST    /rest/users/imgUpload                     amazonaws.AWSController.upload()
