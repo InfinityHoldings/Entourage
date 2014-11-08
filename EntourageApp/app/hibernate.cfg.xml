@@ -9,7 +9,7 @@
 		</property>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<!-- Assume test is the database name -->
-		<property name="hibernate.connection.url">jdbc:postgresql://192.168.1.6:5432/infinitydb</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://169.254.6.114:5432/infinitydb</property>
 		<property name="hibernate.connection.username">entourage</property>
 		<property name="hibernate.connection.password">entourage</property>
 		<property name="javax.persistence.validation.mode">none</property>
@@ -17,6 +17,7 @@
 
 		<!-- List of XML mapping files -->
 		<mapping resource="EntourageUser.hbm.xml" />
+		<mapping resource="S3FileUpload.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>
