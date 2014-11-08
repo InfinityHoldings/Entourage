@@ -11,8 +11,8 @@ import play.Plugin;
 public class S3Plugin extends Plugin {
 
     public static final String AWS_S3_BUCKET = "com.infinity.entourage";
-    public static final String AWS_ACCESS_KEY = "AKIAJ3IPACX6G6LIXPAQ";
-    public static final String AWS_SECRET_KEY = "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";
+    public static final String AWS_ACCESS_KEY = "aws.access.key";
+    public static final String AWS_SECRET_KEY = "aws.secret.key";
     private final Application application;
 
     public static AmazonS3 amazonS3;
