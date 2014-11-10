@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="controllers.EntourageUser" table="ent_user">
+   <class name="models.EntourageUser" table="ent_user">
       <meta attribute="class-description">
          This class contains the entourage user detail. 
       </meta>

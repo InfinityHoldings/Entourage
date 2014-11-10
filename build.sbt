@@ -14,6 +14,7 @@ libraryDependencies ++= Seq(
   javaJpa,
   "org.hibernate.common" % "hibernate-commons-annotations" % "4.0.4.Final",
   "org.hibernate.javax.persistence" % "hibernate-jpa-2.0-api" % "1.0.1.Final",
-  "org.mindrot" % "jbcrypt" % "0.3m"
+  "org.mindrot" % "jbcrypt" % "0.3m",
+  "com.amazonaws" % "aws-java-sdk" % "1.3.11"
 )
 
