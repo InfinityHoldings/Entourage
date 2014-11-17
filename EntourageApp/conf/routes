@@ -10,13 +10,16 @@ GET     /assets/*file                             controllers.Assets.at(path="/p
 
 #-------------------------------------- User API -----------------------------------------#
 
+#User Login
+
+POST	/rest/login   	   			  		      controllers.UserController.login()
+
+#Create New User
+POST    /rest/signUp                              controllers.UserController.signUp()
+
 #Get All Users
 GET     /users                                    controllers.UserController.getAllUsers()
 
-#User Login
-POST   /rest/login   	   			     		  controllers.UserController.login()
-
-POST   /rest/signUp						     	  controllers.UserController.signUp()	
 
 #Get User Detail
 GET    /users/:userName                           controllers.UserController.UserDetail(userName: String)
@@ -29,3 +32,8 @@ POST   /users/:userName/updateNormalInfo          controllers.UserController.upd
 
 #Delete User
 POST   /users/:userName/delete                    controllers.UserController.deleteUser(userName: String)
+
+#--------------------------------------- S3 Connectivity ----------------------------------#
+
+GET     /                         			      controllers.Application.index()
+POST    /rest/users/imgUpload                     amazonaws.AWSController.upload()
