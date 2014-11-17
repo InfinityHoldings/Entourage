@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Cursor;
 import java.util.*;
 import models.EntourageUser;
 
@@ -77,20 +78,31 @@ public class UserController extends Controller {
 				@SuppressWarnings("unchecked")
 				Iterator<EntourageUser> iterator = q.list().iterator();
 				if (!iterator.hasNext()) {
+<<<<<<< HEAD
 					result.put("status", "User Not Found");
+=======
+					result.put("status", "0");
+>>>>>>> development
 					return ok("{User:" + result + "}");
 				} else
 					do {
 						EntourageUser entUser = iterator.next();
 						_uname = entUser.getUserName();
 						_password = entUser.getPassword();
+<<<<<<< HEAD
 						
+=======
+>>>>>>> development
 						// _passwordHash = entUser.getPassword();
 						// _validate = authenticate(username, password,
 						// _passwordHash);
 						if (username.equalsIgnoreCase(_uname)
 								&& password.equals(_password)) {
+<<<<<<< HEAD
 							result.put("status", "User Found");
+=======
+							result.put("status", "1");
+>>>>>>> development
 							return ok("{User:" + result + "}");
 						}
 					} while (iterator.hasNext());

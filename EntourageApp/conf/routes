@@ -11,6 +11,7 @@ GET     /assets/*file                             controllers.Assets.at(path="/p
 #-------------------------------------- User API -----------------------------------------#
 
 #User Login
+
 POST	/rest/login   	   			  		      controllers.UserController.login()
 
 #Create New User
@@ -19,8 +20,9 @@ POST    /rest/signUp                              controllers.UserController.sig
 #Get All Users
 GET     /users                                    controllers.UserController.getAllUsers()
 
+
 #Get User Detail
-GET     /users/:userName                          controllers.UserController.UserDetail(userName: String)
+GET    /users/:userName                           controllers.UserController.UserDetail(userName: String)
 
 #Update user secure detail, require password
 POST   /users/:userName/updateSecuredInfo         controllers.UserController.updateUserSecuredInfo(userName: String)
