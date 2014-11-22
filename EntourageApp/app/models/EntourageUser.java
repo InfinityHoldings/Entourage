@@ -2,7 +2,7 @@ package models;
 
 import java.sql.*;
 
-public class EntourageUser {
+public class EntourageUser{
 	private int uid;
 	private String lastName, firstName, birthDate, title, address1, address2,
 			city, state, postal, phone, email, password, username;
@@ -15,8 +15,7 @@ public class EntourageUser {
 	public EntourageUser(String lastName, String firstName, String birthDate,
 			String title, String address1, String address2, String city,
 			String state, String postal, String phone, String email,
-			String password, String creationDate, // Blob picMedium, Blob
-													// picSmall,
+			String password, String creationDate, //Blob picMedium, Blob picSmall,
 			String userName) {
 		this.setLastName(lastName);
 		this.setFirstName(firstName);
@@ -32,18 +31,17 @@ public class EntourageUser {
 		this.setPassword(password);
 		this.setUserName(userName);
 		this.setCreationDate(creationDate);
-		// this.setProfilePictureMedium(picMedium);
-		// this.setProfilePictureSmall(picSmall);
+		//this.setProfilePictureMedium(picMedium);
+		//this.setProfilePictureSmall(picSmall);
 	}
-
-	// for signup
-	public EntourageUser(String userName, String email, String city,
-			String state, String password) {
-		this.username = userName;
-		this.email = email;
-		this.city = city;
-		this.state = state;
-		this.password = password;
+	
+	//for signup 
+	public EntourageUser(String userName, String email, String city, String state, String password){
+		this.username = userName; 
+		this.email = email; 
+		this.city = city; 
+		this.state = state; 
+		this.password = password; 
 	}
 
 	/**

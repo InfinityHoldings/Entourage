@@ -20,7 +20,7 @@ POST    /rest/signUp                              controllers.UserController.sig
 GET     /users                                    controllers.UserController.getAllUsers()
 
 #Get User Detail
-GET     /users/:userName                          controllers.UserController.UserDetail(userName: String)
+GET    /users/:userName                           controllers.UserController.UserDetail(userName: String)
 
 #Update user secure detail, require password
 POST   /users/:userName/updateSecuredInfo         controllers.UserController.updateUserSecuredInfo(userName: String)

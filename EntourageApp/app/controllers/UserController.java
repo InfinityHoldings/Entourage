@@ -37,7 +37,7 @@ public class UserController extends Controller {
 			String password = json.findPath("password").textValue();
 
 			if (isExist(userName)) {
-				result.put("status", "0");
+				result.put("status", "User Already Exist");
 				return ok("{UserExist:" + result + "}");
 			}
 			EntourageUser user = new EntourageUser(userName, email, city,
@@ -46,7 +46,7 @@ public class UserController extends Controller {
 			Logger.debug("SignUp EntourageUser", user.toString());
 			session.save(user);
 			tx.commit();
-			result.put("status", "1");
+			result.put("status", "User Created");
 			return ok("{UserExist:" + result + "}");
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -84,7 +84,6 @@ public class UserController extends Controller {
 						EntourageUser entUser = iterator.next();
 						_uname = entUser.getUserName();
 						_password = entUser.getPassword();
-						
 						// _passwordHash = entUser.getPassword();
 						// _validate = authenticate(username, password,
 						// _passwordHash);

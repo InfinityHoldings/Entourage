@@ -3,12 +3,9 @@ project/project
 project/target
 target
 tmp
-<<<<<<< HEAD
 dist
 .cache
-=======
 .history
-dist
 /.idea
 /*.iml
 /out
@@ -17,4 +14,3 @@ dist
 /.project
 /RUNNING_PID
 /.settings
->>>>>>> 6b831c9726cdb49136d8294bd7a89a2bfb0dfa07

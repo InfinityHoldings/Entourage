@@ -3,7 +3,6 @@ package amazonaws;
 import java.util.*;
 
 import org.hibernate.*;
-
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -28,6 +27,7 @@ public class AWSController extends Controller {
 				s3.save(); // saves image to AWS
 				session.save(s3); // saves image meta-data to DB
 				tx.commit();
+				session.close();
 			} else {
 				return badRequest("File upload error");
 			}
