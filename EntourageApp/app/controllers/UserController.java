@@ -216,7 +216,10 @@ public class UserController extends Controller {
 		EntourageUser user = null; 
 		
 		String username = json.findPath("username").textValue(); 
+		String newUsername = json.findPath("newUsername").textValue(); 
 		String city = json.findPath("city").textValue(); 
+		String state = json.findPath("state").textValue(); 
+		
 		try{
 			tx = session.beginTransaction(); 
 			if (!isExist(username)) {
@@ -235,8 +238,26 @@ public class UserController extends Controller {
 			//TODO: how do we resolve the typesafe warning? 
 			Iterator<EntourageUser> resultIterator = query.list().iterator(); 
 			while (resultIterator.hasNext()){
-			    user = resultIterator.next(); 
-				user.setCity(city); 
+				
+				user = resultIterator.next(); 
+				
+				//refactor this code to use strategy pattern 
+				if (city != null){ 
+					user.setCity(city); 
+					result.put("City changed to  ", city); 
+				}
+				
+				if (state != null){
+					user.setState(state);
+					result.put("State changed to  ", state); 
+				}
+				
+				if (newUsername != null){ 
+					user.setUserName(username); 
+					result.put("Username changed to ", username); 
+				}
+			    
+				
 			}
 			session.save(user); 
 			tx.commit(); 
