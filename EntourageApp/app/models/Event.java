@@ -20,4 +20,5 @@ public class Event {
 	private void setEventType(String eventName){
 		this.eventName = eventName; 
 	}
+
 }

@@ -11,29 +11,25 @@ GET     /assets/*file                             controllers.Assets.at(path="/p
 #-------------------------------------- User API -----------------------------------------#
 
 #User Login
-
-POST	/rest/login   	   			  		       controllers.UserController.login()
-
+POST	/rest/login   	   			  		      controllers.UserController.login()
 
 #Create New User
-POST    /rest/signUp                               controllers.UserController.signUp()
+POST    /rest/signUp                              controllers.UserController.signUp()
 
 #Get All Users
-GET     /users                                     controllers.UserController.getAllUsers()
+GET     /users                                    controllers.UserController.getAllUsers()
 
 #Get User Detail
-POST    /rest/getUserDetail                        controllers.UserController.getUserDetail()
-
-#Update User Detail
-POST   /rest/updateUser          				   controllers.UserController.updateUser()
+GET    /users/:userName                           controllers.UserController.UserDetail(userName: String)
 
 #Update user secure detail, require password
-POST   /users/:userName/updateSecuredInfo          controllers.UserController.updateUserSecuredInfo(userName: String)
+POST   /users/:userName/updateSecuredInfo         controllers.UserController.updateUserSecuredInfo(userName: String)
 
-
+#Update User Detail
+POST   /users/:userName/updateNormalInfo          controllers.UserController.updateUserNormalInfo(userName: String)
 
 #Delete User
-POST   /rest/deleteUser                            controllers.UserController.deleteUser()
+POST   /users/:userName/delete                    controllers.UserController.deleteUser(userName: String)
 
 #--------------------------------------- S3 Connectivity ----------------------------------#
 

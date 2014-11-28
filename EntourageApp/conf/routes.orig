@@ -11,15 +11,19 @@ GET     /assets/*file                             controllers.Assets.at(path="/p
 #-------------------------------------- User API -----------------------------------------#
 
 #User Login
+<<<<<<< Updated upstream
 
+POST	/rest/login   	   			  		      controllers.UserController.login()
+=======
 POST	/rest/login   	   			  		       controllers.UserController.login()
-
+>>>>>>> Stashed changes
 
 #Create New User
 POST    /rest/signUp                               controllers.UserController.signUp()
 
 #Get All Users
 GET     /users                                     controllers.UserController.getAllUsers()
+
 
 #Get User Detail
 POST    /rest/getUserDetail                        controllers.UserController.getUserDetail()

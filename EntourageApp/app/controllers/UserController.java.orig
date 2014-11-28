@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Cursor;
 import java.util.*;
 import models.EntourageUser;
 
@@ -45,9 +46,11 @@ public class UserController extends Controller {
 			String password = json.findPath("password").textValue();
 
 			if (isExist(userName)) {
-				
+<<<<<<< Updated upstream
+				result.put("status", "0");
+=======
 				result.put("status", "Username Already Exists");
-
+>>>>>>> Stashed changes
 				return ok("{UserExist:" + result + "}");
 			}
 			EntourageUser user = new EntourageUser(userName, email, city,
@@ -56,10 +59,13 @@ public class UserController extends Controller {
 			Logger.debug("ENTOURAGE API: signUp(): New EntourageUser :", user.toString() + "\n");
 			session.save(user);
 			tx.commit();
+<<<<<<< Updated upstream
+			result.put("status", "1");
+			return ok("{UserExist:" + result + "}");
+=======
 			result.put("status", "User Created");
-
 			return ok("{SignUp Response:" + result + "}");
-
+>>>>>>> Stashed changes
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
@@ -95,20 +101,31 @@ public class UserController extends Controller {
 				@SuppressWarnings("unchecked")
 				Iterator<EntourageUser> iterator = q.list().iterator();
 				if (!iterator.hasNext()) {
-
+<<<<<<< HEAD
 					result.put("status", "User Not Found");
+=======
+					result.put("status", "0");
+>>>>>>> development
 					return ok("{User:" + result + "}");
 				} else
 					do {
 						EntourageUser entUser = iterator.next();
 						_uname = entUser.getUserName();
 						_password = entUser.getPassword();
+<<<<<<< HEAD
+						
+=======
+>>>>>>> development
 						// _passwordHash = entUser.getPassword();
 						// _validate = authenticate(username, password,
 						// _passwordHash);
 						if (username.equalsIgnoreCase(_uname)
 								&& password.equals(_password)) {
+<<<<<<< HEAD
 							result.put("status", "User Found");
+=======
+							result.put("status", "1");
+>>>>>>> development
 							return ok("{User:" + result + "}");
 						}
 					} while (iterator.hasNext());
@@ -219,10 +236,7 @@ public class UserController extends Controller {
 		EntourageUser user = null; 
 		
 		String username = json.findPath("username").textValue(); 
-		String newUsername = json.findPath("newUsername").textValue(); 
 		String city = json.findPath("city").textValue(); 
-		String state = json.findPath("state").textValue(); 
-		
 		try{
 			tx = session.beginTransaction(); 
 			if (!isExist(username)) {
@@ -241,26 +255,8 @@ public class UserController extends Controller {
 			//TODO: how do we resolve the typesafe warning? 
 			Iterator<EntourageUser> resultIterator = query.list().iterator(); 
 			while (resultIterator.hasNext()){
-				
-				user = resultIterator.next(); 
-				
-				//refactor this code to use strategy pattern 
-				if (city != null){ 
-					user.setCity(city); 
-					result.put("City changed to  ", city); 
-				}
-				
-				if (state != null){
-					user.setState(state);
-					result.put("State changed to  ", state); 
-				}
-				
-				if (newUsername != null){ 
-					user.setUserName(username); 
-					result.put("Username changed to ", username); 
-				}
-			    
-				
+			    user = resultIterator.next(); 
+				user.setCity(city); 
 			}
 			session.save(user); 
 			tx.commit(); 
