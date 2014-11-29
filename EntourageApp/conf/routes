@@ -35,5 +35,5 @@ POST   /rest/deleteUser                            controllers.UserController.de
 
 #--------------------------------------- S3 Connectivity ----------------------------------#
 
-GET     /                         			      controllers.Application.index()
-POST    /rest/users/imgUpload                     amazonaws.AWSController.upload()
+GET     /                         			       controllers.Application.index()
+POST    /rest/users/imgUpload                      amazonaws.AWSController.upload()
