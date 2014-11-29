@@ -414,6 +414,35 @@ public class UserController extends Controller {
 		
 		return id; 
 	}
+	
+	public static EntourageUser getUserByUsername(String username){
+		Integer id = null; 
+		
+		Session session = HibernateUtil.getSessionFactory().openSession(); 
+		Transaction tx = null; 
+		EntourageUser user = null; 
+		
+		try {
+			tx = session.beginTransaction(); 
+			String sql = "SELECT * FROM ent_user WHERE username ='" + username + "'"; 
+			SQLQuery query = session.createSQLQuery(sql); 
+			query.addEntity(EntourageUser.class); 
+			Iterator<EntourageUser> resultIterator = query.list().iterator(); 
+			
+			while( resultIterator.hasNext()){
+				user = resultIterator.next(); 
+			
+			}
+			
+		} catch (HibernateException e){
+			tx.rollback(); 
+			e.printStackTrace(); 
+		} finally {
+			session.close(); 
+		}
+		
+		return user; 
+	}
 
 	public static boolean authenticate(String userName, String password,
 			String passwordHash) {

@@ -41,6 +41,11 @@ POST   /rest/deleteUser                            controllers.UserController.de
 POST	/rest/createEvent							controllers.EventController.createEvent()
 
 GET 	/rest/getEvents								controllers.EventController.getEvents()
+
+POST 	/rest/getEventDetails						controllers.EventController.getEventDetails()
+
+POST 	/rest/deleteEvent							controllers.EventController.deleteEvent()
+
 #--------------------------------------- S3 Connectivity ----------------------------------#
 
 GET     /                         			      controllers.Application.index()

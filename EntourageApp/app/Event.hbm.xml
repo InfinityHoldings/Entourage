@@ -18,6 +18,7 @@
      <property name="type" type="string" column="type" /> 
      <property name="host" type="string" column="host" /> 
      <property name="address1" column="address1" type="string"/>
+     <property name="ent_usr_uid" column="ent_usr_uid" type="int" /> 
      
      
      
