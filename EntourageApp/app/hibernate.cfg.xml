@@ -18,6 +18,7 @@
 		<!-- List of XML mapping files -->
 		<mapping resource="EntourageUser.hbm.xml" />
 		<mapping resource="S3FileImageUpload.hbm.xml" />
+		<mapping resource="Event.hbm.xml" /> 
 
 	</session-factory>
 </hibernate-configuration>
