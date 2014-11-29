@@ -35,6 +35,12 @@ POST   /users/:userName/updateSecuredInfo          controllers.UserController.up
 #Delete User
 POST   /rest/deleteUser                            controllers.UserController.deleteUser()
 
+
+#------------------------------------- Event API ------------------------------------------#
+
+POST	/rest/createEvent							controllers.EventController.createEvent()
+
+GET 	/rest/getEvents								controllers.EventController.getEvents()
 #--------------------------------------- S3 Connectivity ----------------------------------#
 
 GET     /                         			      controllers.Application.index()
